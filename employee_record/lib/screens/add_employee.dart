@@ -31,7 +31,7 @@ class _AddEmployeeState extends State<AddEmployee> {
   Map args = {};
   @override
   void initState() {
-    print("init");
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       args = ModalRoute.of(context)?.settings.arguments as Map;
       if (args["mode"] == "edit") {
@@ -66,13 +66,6 @@ class _AddEmployeeState extends State<AddEmployee> {
     }
 
     return null;
-  }
-
-  @override
-  void didChangeDependencies() {
-    print("did");
-
-    super.didChangeDependencies();
   }
 
   @override
@@ -467,12 +460,13 @@ class _AddEmployeeState extends State<AddEmployee> {
 
   @override
   Widget build(BuildContext context) {
-    print("build");
+ final Map argsUpdate = ModalRoute.of(context)?.settings.arguments as Map;
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: false,
           backgroundColor: Colors.blue,
-          title: args["mode"] == "add"
+          title: argsUpdate["mode"] == "add"
               ? Text(
                   "Add Employee Details",
                   style: TextStyle(color: Colors.white),
@@ -612,7 +606,7 @@ class _AddEmployeeState extends State<AddEmployee> {
                         ),
                         ElevatedButton(
                             onPressed: () {
-                              if (args["mode"] == "add") {
+                              if (argsUpdate["mode"] == "add") {
                                 if (_formKey.currentState!.validate()) {
                                   Navigator.pushReplacementNamed(context, '/');
                                   context
